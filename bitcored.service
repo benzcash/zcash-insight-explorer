@@ -1,0 +1,15 @@
+[Unit]
+Description=Zcash Bitcore node
+After=network.target
+
+[Service]
+Type=simple
+User=zcashd
+WorkingDirectory=/home/zcashd/zc
+ExecStart=/home/zcashd/zc/node_modules/bitcore-node-zcash/bin/bitcore-node start
+ExecReload=/bin/kill -2 \$MAINPID
+KillMode=process
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
