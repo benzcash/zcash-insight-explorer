@@ -1,0 +1,43 @@
+version: '3.6'
+
+services:
+  lb:
+    image: traefik:latest
+    command: >
+      --web
+      --docker
+      --docker.swarmmode
+      --docker.domain=${DOMAIN}
+      --docker.watch
+      --entryPoints='Name:http Address::80 Redirect.EntryPoint:https'
+      --entryPoints='Name:https Address::443 TLS'
+      --defaultEntryPoints=http,https
+      --acme.entryPoint=https
+      --acme.email=${EMAIL}
+      --acme.storage=/etc/traefik/acme/acme.json
+      --acme.domains=domain.tld
+      --acme.onHostRule=true
+      --acme.httpChallenge.entryPoint=http
+      --accesslogsfile=/dev/stdout
+      --logLevel=INFO
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /data/etc/traefik/acme:/etc/traefik/acme
+    ports:
+      - "80:80"
+      - "443:443"
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+  explorer:
+    image: ianamunoz/zcash-insight-explorer:v1.1.1
+    deploy:
+      placement:
+        constraints:
+          - node.hostname == ${EXPLORER_HOST}
+      labels:
+        - traefik.frontend.rule=Host:explorer.${DOMAIN}
+        - traefik.port=3001
+        - traefik.weight=7
+        - traefik.frontend.entryPoints=https
