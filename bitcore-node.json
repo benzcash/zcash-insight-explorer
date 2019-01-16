@@ -9,7 +9,7 @@
     "bitcoind": {
       "spawn": {
         "datadir": "/home/zcashd/.zcash",
-        "exec": "/usr/bin/zcashd"
+        "exec": "/home/zcashd/zcash-patched-for-explorer/src/zcashd"
       }
     },
     "insight-api-zcash": {
