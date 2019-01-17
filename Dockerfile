@@ -1,10 +1,7 @@
 FROM debian:latest
-# Run 'docker build .' from github clone
-# docker run -p80:3001 -v $(pwd)/dot-zcash:/home/zcashd/.zcash
 
 RUN apt-get update \
     && apt-get install -y gnupg2 wget libzmq3-dev git \
-# zcash build (see RTD User Guide):
     && apt-get -qqy install \
         build-essential pkg-config libc6-dev m4 g++-multilib \
         autoconf libtool ncurses-dev unzip git python python-zmq \
@@ -29,8 +26,7 @@ RUN git clone https://github.com/zcash-hackworks/zcash-patched-for-explorer.git
 WORKDIR /home/zcashd/zcash-patched-for-explorer
 RUN git checkout v2.0.2-insight-explorer
 
-# keep jobs low to minimize chances of running out of memory
-RUN zcutil/build.sh -j2
+RUN zcutil/build.sh -j$(nproc)
 RUN zcutil/fetch-params.sh
 
 WORKDIR /home/zcashd/
