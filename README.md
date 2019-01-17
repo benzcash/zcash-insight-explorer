@@ -18,4 +18,4 @@ The `docker-service.sh` file shows you might might manually run it as a service 
 
 ToDo: tags for versions
 
-Set up ad-hoc [Google Cloud](.docs/ad_hoc_gcp.md) instance.
+Set up ad-hoc [Google Cloud](./docs/ad_hoc_gcp.md) instance.
