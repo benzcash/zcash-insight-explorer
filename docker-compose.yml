@@ -31,7 +31,7 @@ services:
         constraints:
           - node.role == manager
   explorer:
-    image: ianamunoz/zcash-insight-explorer:v1.1.1
+    image: zcash-hackworks/zcash-insight-explorer:latest
     deploy:
       placement:
         constraints:

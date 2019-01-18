@@ -27,7 +27,7 @@ sudo apt-get install git
 ```
 Clone repo and build image
 ```
-git clone https://github.com/ianamunoz/zcash-insight-explorer.git
+git clone https://github.com/zcash-hackworks/zcash-insight-explorer.git
 cd zcash-insight-explorer
 docker build -t zcash-hackworks/zcash-insight-explorer .
 ```
