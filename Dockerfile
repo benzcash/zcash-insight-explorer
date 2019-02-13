@@ -1,4 +1,6 @@
 FROM debian:latest
+# Run 'docker build -t zcash-insight-explorer:latest .' from github clone
+# docker run -p80:3001 -v $(pwd)/dot-zcash:/home/zcashd/.zcash zcash-insight-explorer
 
 RUN apt-get update \
     && apt-get install -y gnupg2 wget libzmq3-dev git \
@@ -24,7 +26,7 @@ WORKDIR /home/zcashd/
 
 RUN git clone https://github.com/zcash-hackworks/zcash-patched-for-explorer.git
 WORKDIR /home/zcashd/zcash-patched-for-explorer
-RUN git checkout v2.0.2-insight-explorer
+RUN git checkout v2.0.3-insight-explorer
 
 RUN zcutil/build.sh -j$(nproc)
 RUN zcutil/fetch-params.sh
