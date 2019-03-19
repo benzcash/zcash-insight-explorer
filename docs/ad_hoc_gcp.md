@@ -7,7 +7,7 @@ gcloud compute instances create testnet-explorer \
 --subnet=default \
 --network-tier=PREMIUM \
 --tags=https-server \
---image=debian-9 \
+--image-family=debian-9 \
 --image-project=debian-cloud \
 --boot-disk-size=24GB \
 --boot-disk-type=pd-standard \
