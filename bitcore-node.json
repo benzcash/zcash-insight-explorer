@@ -7,10 +7,15 @@
   ],
   "servicesConfig": {
     "bitcoind": {
-      "spawn": {
-        "datadir": "/home/zcashd/.zcash",
-        "exec": "/home/zcashd/zcash-patched-for-explorer/src/zcashd"
-      }
+      "connect": [
+        {
+          "rpchost": "zcashd",
+          "rpcport": 18232,
+          "rpcuser": "bitcoin",
+          "rpcpassword": "local321",
+          "zmqpubrawtx": "tcp://zcashd:9994"
+        }
+      ]
     },
     "insight-api-zcash": {
       "routePrefix": "api"
